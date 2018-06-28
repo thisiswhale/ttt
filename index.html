@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Tic tac toe</title>
+</head>
+<link rel="stylesheet" href="style.css">
+<body onload="startGame(false);">
+	<div id="control">
+		<a href="#" class='mode' id='player2' onclick="startGame(false); this.blur(); ">Vs. Human</a> |
+		<a href="#" class='mode' id='computer' onclick="startGame(true); this.blur();">Vs.Computer</a>
+	</div>
+
+	<table id="board">
+		<tr>
+			<td class="top left cell" id='0'></td>
+			<td class="top center cell" id='1'></td>
+			<td class="top right cell" id='2'></td>
+		</tr>
+		<tr>
+			<td class="middle left cell" id='3'></td>
+			<td class="middle center cell" id='4'></td>
+			<td class="middle right cell" id='5'></td>
+		</tr>
+		<tr>
+			<td class="bottom left cell" id='6'></td>
+			<td class="bottom center cell" id='7'></td>
+			<td class="bottom right cell" id='8'></td>
+		</tr>
+	</table>
+
+	<div id="footer">created by william.kou.leung@gmail.com</div>
+	<script src='script.js'></script>
+</body>
+</html>

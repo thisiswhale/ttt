@@ -1,0 +1,220 @@
+const Player = (name, marker) => {
+	return {name, marker};
+};
+
+const Gameboard = () => {
+	let gameboard, turns, playerOneTurn;
+
+	var winSets = [
+		[0, 1, 2],
+		[3, 4, 5],
+		[6, 7, 8],
+		[0, 3, 6],
+		[1, 4, 7],
+		[2, 5, 8],
+		[0, 4, 8],
+		[2, 4, 6]
+	];
+
+	let checkWin = (grid, marker) => {
+		//finds the index of the player's marker
+		let markersPlay = grid.reduce((arr, gridIndexMarker, index) =>
+				(gridIndexMarker === marker) ? arr.concat(index) : arr, []);
+		let gameWon = null;
+		//use winSets to compare markersPlay to find the winning combination
+			for (let [index, thisSet] of winSets.entries()) {
+				if (thisSet.every(el => markersPlay.indexOf(el) > -1)) {
+					gameWon = { index, marker};
+					break;
+				}
+			}
+		return gameWon;
+	}
+
+	let minimax = (newGrid, computerMarker) =>{
+		let availSpots = newGrid.filter(cell => cell != 'x' && cell != 'o');
+		// checks for the terminal states such as win, lose, and tie and returning a value accordingly
+		if (checkWin(newGrid, 'x')) {
+			return {score: -10};
+		} else if (checkWin(newGrid, 'o')) {
+			return {score: 10};
+		} else if (availSpots.length === 0) {
+			return {score: 0};
+		}
+		// an array to collect all the objects
+		let moves = [];
+		// loop through available spots
+		for (let i = 0; i < availSpots.length; i++) {
+			//create an object for each and store the index of that spot that was stored as a number in the object's index key
+			let move = {};
+			move.index = newGrid[availSpots[i]];
+			// set the empty spot to the current player
+			newGrid[availSpots[i]] = computerMarker;
+			//if collect the score resulted from calling minimax on the opponent of the current player (recursion)
+			if (computerMarker == 'o') {
+				let result = minimax(newGrid, 'x');
+				move.score = result.score;
+			} else {
+				let result = minimax(newGrid, 'o');
+				move.score = result.score;
+			}
+			//reset the spot to empty
+			newGrid[availSpots[i]] = move.index;
+			// push the object to the array
+			moves.push(move);
+		}
+		// if it is the computer's turn loop over the moves and choose the move with the highest score
+		let bestMove;
+		if (computerMarker === 'o') {
+			let bestScore = -10000;
+			for (let i = 0; i < moves.length; i++) {
+				if (moves[i].score > bestScore) {
+					bestScore = moves[i].score;
+					bestMove = i;
+				}
+			}
+		} else {
+			// else loop over the moves and choose the move with the lowest score
+			let bestScore = 10000;
+			for (let i = 0; i < moves.length; i++) {
+				if (moves[i].score < bestScore) {
+					bestScore = moves[i].score;
+					bestMove = i;
+				}
+			}
+		}
+		// return the chosen move (object) from the array to the higher depth
+		return moves[bestMove];
+	}
+
+	let handlers = {
+		resetGame : () => {
+			//Reset settings to start game
+		 gameboard = [...Array(9).keys()];
+		 turns = gameboard.length;
+		 playerOneTurn = true;
+	 	},
+		getBoard: () => {
+			//returns game data array
+			return gameboard;
+		},
+		isPlayer1Turn: () => {
+			//returns boolean value
+			return playerOneTurn;
+		},
+		markSquare: (squareId, player) => {
+			//updates the gameboard array, display marker indicator to DOM, subtract turn
+			gameboard[squareId] = player.marker;
+			turns--;
+		},
+    changeTurn: () => {
+			//switch players
+      playerOneTurn = !playerOneTurn;
+    },
+		getComputerTurnId: computer =>{
+			//returns AI best move based on gameboard array
+			 let bestMove = minimax(gameboard, computer.marker);
+			 gameboard[bestMove.index] = computer.marker;
+			 return bestMove.index;
+		},
+    isWinner: player => {
+			//returns an object of the Winner, else is null
+			return	checkWin(gameboard,player.marker);
+    },
+		isGameOver: result => {
+			let gameOver;
+			if(result) gameOver = winSets[result.index]; //returns an array of winSet[index]
+			else if(turns === 0) gameOver =  'draw'; //returns 'draw'
+			else gameOver = false; //returns nothing
+
+			return gameOver;
+		}
+	};
+  return handlers;
+};
+
+//START THE GAME
+const startGame =  (isComputer) => {
+	let player1 = Player('Player1', 'x');
+	let player2;
+
+	if(!isComputer) player2 = Player('Player2', 'o');
+	else player2 = Player('Computer', 'o');
+
+	let board = Gameboard();
+	board.resetGame();
+
+	let squares = document.querySelectorAll('.cell');
+	let controlSettings = document.querySelector('#control');
+	let tableUI = document.querySelector('table');
+
+	const reset = event =>{
+		let setting = event.target.className;
+			if(setting.includes('mode'))	{
+				//Removes grid classNames with full, win and tie.
+				squares.forEach( cell => {
+	 				cell.innerHTML ="";
+	 				let resetClassName = cell.className.split(" ").filter(className =>
+	 					className != 'full' && className !='win' && className != 'tie'
+	 					).join(" ");
+	 				cell.className = resetClassName;
+	 		 });
+				board.resetGame();}
+	}
+	controlSettings.addEventListener('click', reset);
+
+	const humanTurn = square => {
+    let selectCell = square.target;
+
+			if(selectCell.className.includes('cell') &&
+					typeof board.getBoard()[selectCell.id] == 'number'){
+				//Player 1 Human turn
+				if(board.isPlayer1Turn()){
+					viewSquare(selectCell.id, player1);
+					viewGameOver(player1);
+				}
+				//Player 2 Human turn
+				else if(!board.isPlayer1Turn() && player2.name === 'Player2'){
+					viewSquare(selectCell.id, player2);
+					viewGameOver(player2);
+				}
+				//Player 2 Computer turn
+				if (!board.isPlayer1Turn() && player2.name === 'Computer'){
+					viewSquare(board.getComputerTurnId(player2), player2);
+					viewGameOver(player2);
+				}
+    }
+  }
+	//Add onclick eventlistener to the table
+	tableUI.onclick = humanTurn;
+
+	const viewSquare = (squareId, player) =>{
+		board.markSquare(squareId, player);
+		let square = document.getElementById(squareId);
+		square.innerText = player.marker;
+		square.className += ' full';
+	}
+
+	const viewGameOver = (player) =>{
+		if(board.isGameOver(board.isWinner(player))){
+			let result =board.isGameOver(board.isWinner(player));
+			if(result !== 'draw' ){ // view WIN
+				result.forEach( index =>{
+					squares[index].className += ' win';
+				});
+			}
+			else { // view DRAW
+				squares.forEach( cell => {
+					cell.className += ' tie';
+				});
+			}
+			tableUI.onclick = "";
+		}
+		else{
+			board.changeTurn();
+		}
+	}
+
+}
+
+module.exports = {Player, Gameboard};

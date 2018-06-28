@@ -1,0 +1,93 @@
+html,
+body {
+	padding: 0;
+	background: #FFF;
+	color: #000;
+	margin: 0;
+}
+
+body {
+	font: 14px Arial, sans-serif;
+	margin: 20px 30px 0;
+}
+
+a {
+	color: #35C;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+td {
+	padding: 0;
+	border: 2px solid black;
+	text-align: center;
+	cursor: default;
+	vertical-align: middle;
+}
+
+#board {
+	border-collapse: collapse;
+	border-spacing: 0;
+	margin: 0 auto;
+}
+
+#board td {
+	font: bold 50px/55px monospace;
+	width: 100px;
+	height: 100px;
+	overflow: hidden;
+}
+
+#board td:hover {
+	background: #EFE;
+}
+
+#board .full:hover {
+	background: #FEE;
+}
+
+#board .top {
+	border-top: 0;
+}
+
+#board .bottom {
+	border-bottom: 0;
+}
+
+#board .left {
+	border-left: 0;
+}
+
+#board .right {
+	border-right: 0;
+}
+
+#board .win,
+#board .win:hover {
+	background: #ADF;
+}
+
+#board .tie,
+#board .tie:hover {
+	background: #FE8;
+}
+
+#control {
+	margin: 0 0 30px;
+	padding: 3px 6px;
+	background: #EEE;
+}
+
+#footer {
+	margin: 30px 0 0;
+	padding: 3px 6px;
+	background: #EEE;
+	text-align: right;
+}
+
+#test {
+	padding: 0 5px;
+}
