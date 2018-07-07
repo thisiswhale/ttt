@@ -2,8 +2,8 @@ const Player = (name, marker) => {
 	return {name, marker};
 };
 
-const Gameboard = () => {
-	let gameboard, turns, playerOneTurn;
+const Board = () => {
+	let grid, turns, playerOneTurn;
 
 	const winSets = [
 		[0, 1, 2],
@@ -98,34 +98,34 @@ const Gameboard = () => {
 
 	let handlers = {
 		resetGame : () => {
-		 gameboard = [...Array(9).keys()];
-		 turns = gameboard.length;
+		 grid = [...Array(9).keys()];
+		 turns = grid.length;
 		 playerOneTurn = true;
 	 	},
 		getBoard: () => {
-			return gameboard;
+			return grid;
 		},
 		isPlayer1Turn: () => {
 			return playerOneTurn;
 		},
-    //updates the gameboard array, display marker indicator to DOM, subtract turn
+    //updates the grid array, display marker indicator to DOM, subtract turn
 		markSquare: (squareId, player) => {
-			gameboard[squareId] = player.marker;
+			grid[squareId] = player.marker;
 			turns--;
 		},
     //switch players
     changePlayer: () => {
       playerOneTurn = !playerOneTurn;
     },
-    //returns AI best move based on gameboard array
+    //returns AI best move based on grid array
 		getComputerTurnId: computer =>{
-			 let bestMove = minimax(gameboard, computer.marker);
-			 gameboard[bestMove.index] = computer.marker;
+			 let bestMove = minimax(grid, computer.marker);
+			 grid[bestMove.index] = computer.marker;
 			 return bestMove.index;
 		},
 		//returns an object of the Winner, else is null
     isWinner: player => {
-			return	checkWin(gameboard,player.marker);
+			return	checkWin(grid,player.marker);
     },
 		isGameOver: result => {
 			let gameOver;
@@ -150,7 +150,7 @@ const startGame =  (isComputer) => {
 	if(!isComputer) player2 = Player('Player2', 'o');
 	else player2 = Player('Computer', 'o');
 
-	let board = Gameboard();
+	let board = Board();
 	board.resetGame();
 
 	let squares = document.querySelectorAll('.cell');
@@ -212,7 +212,7 @@ const startGame =  (isComputer) => {
 					squares[index].className += ' win';
 				});
 			}
-			else { 
+			else {
 				squares.forEach( cell => {
 					cell.className += ' tie';
 				});
@@ -226,4 +226,4 @@ const startGame =  (isComputer) => {
 
 }
 
-module.exports = {Player, Gameboard};
+module.exports = {Player, Board};
