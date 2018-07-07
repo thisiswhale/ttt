@@ -23,4 +23,7 @@ Have mocha in your local by using:
 #### Process #1
 - I previously created a Tic Tac Toe game in JS to play against an AI using the minimax algorithm. I'm reusing some of the previous code to implement into this assignment.
 - This time, I need to build with an option to play against a human player or a computer. I build the application using closures to break my methods with a single responsibility while following the MVC design.
-- I used Mocha testing to check all my variables are running as it purpose. 
+- I used Mocha testing to check all my variables are running as it purpose.
+
+#### Process #2
+- I decided to refactor my game into a OOP approach since SOLID is the foundation of OOP. I had a difficult time applying the principles in a procedural programming approach.
