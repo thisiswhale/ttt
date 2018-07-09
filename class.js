@@ -6,23 +6,26 @@ class Player {
 		this.marker = marker;
 	}
 	getInfo(){
-		return {this.name, this.marker}
+		return {name:this.name, marker: this.marker};
 	}
+
 	getName(){
 		return this.name;
 	}
+
 	getMarker() {
 		return this.marker;
 	}
 
-	markSquare(gameboard,squareId) {
+	setSquare(gameboard,squareId) {
 		gameboard[squareId] = this.marker;
+
 	}
 
 }
-let hello = new Player('hu', 'x')
 
 class Board {
+
 	constructor() {
 		this.grid = [...Array(9).keys()];
 		this.turnsLeft = this.grid.length;
@@ -37,27 +40,40 @@ class Board {
 		return playerOneTurn;
 	}
 
-	checkWin(grid, marker) {
+	hasWinner(marker) {
+		const winSets = [
+			[0, 1, 2],
+			[3, 4, 5],
+			[6, 7, 8],
+			[0, 3, 6],
+			[1, 4, 7],
+			[2, 5, 8],
+			[0, 4, 8],
+			[2, 4, 6]
+		];
+
 		//finds the index of the player's marker
-		const markersPlay = grid.reduce(
-			(arr, gridIndexMarker, index) => (gridIndexMarker === marker)
-			? arr.concat(index)
-			: arr,
-		[]);
+		const markersPlay = this.grid.reduce(
+			(arr, gridIndexMarker, index) => (gridIndexMarker === marker) ? arr.concat(index): arr,[]);
 		let gameWon = null;
 		//use winSets to compare markersPlay to find the winning combination
 		for (let [index, thisSet] of winSets.entries()) {
 			if (thisSet.every(el => markersPlay.indexOf(el) > -1)) {
-				gameWon = {
-					index,
-					marker
-				};
+				gameWon = {index:winSets[index],	marker:marker};
 				break;
 			}
 		}
 		return gameWon;
 	}
 }
+
+let test = new Board();
+let p = new Player('human', 'x')
+p.setSquare(test.getBoard(), 1);
+p.setSquare(test.getBoard(), 0);
+p.setSquare(test.getBoard(), 2);
+console.log(test.getBoard())
+console.log(test.hasWinner('x'))
 
 class initGame {
 	constructor() {
