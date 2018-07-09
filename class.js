@@ -5,23 +5,22 @@ class Player {
 		this.name = name;
 		this.marker = marker;
 	}
-	getInfo(){
-		return {name:this.name, marker: this.marker};
+	getData(){
+		return {
+			name:this.name,
+			marker: this.marker
+		};
 	}
 
-	getName(){
-		return this.name;
-	}
+}
 
-	getMarker() {
-		return this.marker;
+class Human extends Player {
+	constructor(name, marker){
+		super(name,marker);
 	}
-
 	setSquare(gameboard,squareId) {
 		gameboard[squareId] = this.marker;
-
 	}
-
 }
 
 class Board {
@@ -55,20 +54,21 @@ class Board {
 		//finds the index of the player's marker
 		const markersPlay = this.grid.reduce(
 			(arr, gridIndexMarker, index) => (gridIndexMarker === marker) ? arr.concat(index): arr,[]);
-		let gameWon = null;
+		let winner = null;
 		//use winSets to compare markersPlay to find the winning combination
 		for (let [index, thisSet] of winSets.entries()) {
 			if (thisSet.every(el => markersPlay.indexOf(el) > -1)) {
-				gameWon = {index:winSets[index],	marker:marker};
+				winner = {index:winSets[index],	marker:marker};
 				break;
 			}
 		}
-		return gameWon;
+		return winner;
 	}
 }
 
 let test = new Board();
-let p = new Player('human', 'x')
+let p = new Human('human', 'x');
+console.log(p.getData().marker)
 p.setSquare(test.getBoard(), 1);
 p.setSquare(test.getBoard(), 0);
 p.setSquare(test.getBoard(), 2);
