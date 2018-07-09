@@ -27,16 +27,26 @@ class Board {
 
 	constructor() {
 		this.grid = [...Array(9).keys()];
-		this.turnsLeft = this.grid.length;
-		this.playerOneTurn = true;
 	}
 
 	getBoard() {
 		return this.grid;
 	}
 
+}
+
+class Tictactoe extends Board{
+	constructor(){
+		super();
+		this.turnsLeft = this.grid.length;
+		this.playerOneTurn = true;
+	}
+
 	isPlayerTurn(){
 		return playerOneTurn;
+	}
+	getTurns(){
+		return this.turnsLeft;
 	}
 
 	hasWinner(marker) {
@@ -66,7 +76,8 @@ class Board {
 	}
 }
 
-let test = new Board();
+let test = new Tictactoe();
+
 let p = new Human('human', 'x');
 console.log(p.getData().marker)
 p.setSquare(test.getBoard(), 1);
