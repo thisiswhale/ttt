@@ -174,5 +174,30 @@ describe("Tic Tac Toe App Test", function() {
 		});
 	});
 
+	describe("Winning diagonal indicator",function() {
+		it("should have a win in Diagonal 1", function() {
+			testBoard = new Tictactoe();
+			let grid = testBoard.getBoard();;
+			playerOne.setSquare(grid, 0);
+			playerOne.setSquare(grid, 4);
+			playerOne.setSquare(grid, 8);
 
+			let player = playerOne.isWinner(grid);
+			assert.deepEqual(player.marker, playerOne.marker);
+			assert.deepEqual(player.index, [0,4,8]);
+		});
+
+		it("should have a win in Diagonal 2", function() {
+			testBoard = new Tictactoe();
+			let grid = testBoard.getBoard();;
+			playerOne.setSquare(grid, 2);
+			playerOne.setSquare(grid, 4);
+			playerOne.setSquare(grid, 6);
+
+			let player = playerOne.isWinner(grid);
+			assert.deepEqual(player.marker, playerOne.marker);
+			assert.deepEqual(player.index, [2,4,6]);
+		});
+
+	});
 });
