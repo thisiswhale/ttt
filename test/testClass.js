@@ -29,24 +29,48 @@ describe("Tic Tac Toe App Test", function() {
 		});
 	});
 
-
 	describe("Player1's first move",function() {
 		it("should have a cell fill by Player1's move", function() {
 			playerOne.setSquare(testBoard.getBoard(), 2);
 			assert.deepEqual(testBoard.getBoard()[2],playerOne.marker);
 		});
+
 		it("should be a data type string by Player1's move", function() {
 			assert.deepEqual(typeof testBoard.getBoard()[0],'number');
 			assert.deepEqual(typeof testBoard.getBoard()[1],'number');
 			assert.deepEqual(typeof testBoard.getBoard()[2],'string');
 		});
+
 		it("should not end the game", function() {
-			assert.deepEqual(testBoard.isGameOver(playerOne.isWinner(testBoard.getBoard(), playerOne.getData().marker)), null);
+			assert.deepEqual(testBoard.isGameOver(playerOne.isWinner(testBoard.getBoard(), playerOne.getData().marker)), false);
 		});
+
 		it("should switch player move", function() {
-			testBoard.changeTurn();
-			assert.deepEqual(testBoard.isPlayer1Turn(), false);
+			testBoard.setPlayerTurn();
+			assert.deepEqual(testBoard.isPlayerOneTurn(), false);
 		});
 	});
+
+	describe("Player2's move",function() {
+    it("should have a cell fill by Player2's move", function() {
+			playerTwo.setSquare(testBoard.getBoard(), 4);
+      assert.deepEqual(testBoard.getBoard()[4],playerTwo.marker);
+    });
+
+    it("should be a data type string by Player2's move", function() {
+      assert.deepEqual(typeof testBoard.getBoard()[0],'number');
+      assert.deepEqual(typeof testBoard.getBoard()[1],'number');
+      assert.deepEqual(typeof testBoard.getBoard()[4],'string');
+    });
+
+    it("should not end the game", function() {
+			assert.deepEqual(testBoard.isGameOver(playerTwo.isWinner(testBoard.getBoard(), playerTwo.getData().marker)), false);
+    });
+
+    it("should switch player move", function() {
+      testBoard.setPlayerTurn();
+      assert.deepEqual(testBoard.isPlayerOneTurn(), true);
+    });
+  });
 
 });
