@@ -87,3 +87,5 @@ class Computer extends Player {
 		gameboard[getBestMoveId] = this.marker;
 	}
 }
+
+module.exports = Computer;
