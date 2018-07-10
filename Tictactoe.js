@@ -19,6 +19,9 @@ class Tictactoe extends Board{
 		return this.grid.filter( square => typeof square !== 'number').length === 0;
 	}
 
+	isGameOver(hasWon){
+		return hasWon || this.hasTie();
+	}
 }
 
 module.exports = Tictactoe;

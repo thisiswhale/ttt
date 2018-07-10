@@ -12,6 +12,7 @@ class Player {
 			marker: this.marker
 		};
 	}
+
 	isWinner(grid, playerMarker){
 		const winSets = [
 			[0, 1, 2], [3, 4, 5], [6, 7, 8],
@@ -52,13 +53,11 @@ class Board {
 	getBoard() {
 		return this.grid;
 	}
-
 }
 
 class Tictactoe extends Board{
 	constructor(){
 		super();
-		this.turnsLeft = this.grid.length;
 		this.playerOneTurn = true;
 	}
 
@@ -70,16 +69,14 @@ class Tictactoe extends Board{
 		this.playerOneTurn = !this.playerOneTurn;
 	}
 
-	getTurns(){
-		return this.turnsLeft;
-	}
-
 	hasTie(){
 		return this.grid.filter( square => typeof square !== 'number').length === 0;
 	}
 
+	isGameOver(hasWon){
+		return hasWon || this.hasTie();
+	}
 }
-
 
 class Computer extends Player {
 	constructor(name, marker) {
@@ -165,16 +162,9 @@ class Computer extends Player {
 		return moves[bestIdSquare];
 	}
 
-
 	setSquare(gameboard) {
 		let getBestMoveId = this.minimax(gameboard, this.marker).index;
 		gameboard[getBestMoveId] = this.marker;
-	}
-
-	debugger(board){
-
-		let getBestMoveId = this.minimax(board,'o');
-		return getBestMoveId
 	}
 }
 
@@ -184,17 +174,17 @@ let ai = new Computer('name','o')
 
 p.setSquare(test.getBoard(), 1);
 console.log(test.getBoard());
-p.setSquare(test.getBoard(), 0);
+ai.setSquare(test.getBoard())
 console.log(test.getBoard());
-console.log(ai.debugger(test.getBoard()))
-
-
-console.log(ai.setSquare(test.getBoard()))
-// ai.setSquare(test.getBoard());
-// p.setSquare(test.getBoard(), 2);
-
-// console.log(test.getBoard())
-// console.log(p.isWinner(test.getBoard(), p.getData().marker))
+p.setSquare(test.getBoard(), 2);
+console.log(test.getBoard());
+ai.setSquare(test.getBoard());
+console.log(test.getBoard());
+p.setSquare(test.getBoard(), 8);
+console.log(test.hasTie())
+console.log(test.isGameOver(p.isWinner(test.getBoard(), p.getData().marker)))
+console.log(test.getBoard())
+console.log(p.isWinner(test.getBoard(), p.getData().marker))
 // console.log(test.hasTie())
 
 
