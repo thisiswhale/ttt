@@ -14,6 +14,7 @@ class Player {
 	}
 
 	isWinner(grid, playerMarker){
+		if(playerMarker === undefined) playerMarker = this.marker;
 		const winSets = [
 			[0, 1, 2], [3, 4, 5], [6, 7, 8],
 			[0, 3, 6], [1, 4, 7], [2, 5, 8],
@@ -27,7 +28,7 @@ class Player {
 		//use winSets to compare markersPlay to find the winning combination
 			for (let [index, thisSet] of winSets.entries()) {
 				if (thisSet.every(el => markersPlay.indexOf(el) > -1)) {
-					winner = { index: winSets[index], playerMarker};
+					winner = { index: winSets[index], marker: playerMarker};
 					break;
 				}
 			}
