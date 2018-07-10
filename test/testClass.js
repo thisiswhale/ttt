@@ -98,7 +98,7 @@ describe("Tic Tac Toe App Test", function() {
     });
   });
 
-	describe("Winner indicator",function() {
+	describe("Winning row indicator",function() {
     it("should have a win in Row 1", function() {
 			testBoard = new Tictactoe();
 			let grid = testBoard.getBoard();;
@@ -135,71 +135,44 @@ describe("Tic Tac Toe App Test", function() {
 			assert.deepEqual(player.index, [6,7,8]);
 		});
 	});
+
+	describe("Winning horizontal indicator",function() {
+    it("should have a win in Horizontal 1", function() {
+			testBoard = new Tictactoe();
+			let grid = testBoard.getBoard();;
+			playerOne.setSquare(grid, 0);
+			playerOne.setSquare(grid, 3);
+			playerOne.setSquare(grid, 6);
+
+      let player = playerOne.isWinner(grid);
+      assert.deepEqual(player.marker, playerOne.marker);
+      assert.deepEqual(player.index, [0,3,6]);
+		});
+
+		it("should have a win in Horizontal 2", function() {
+			testBoard = new Tictactoe();
+			let grid = testBoard.getBoard();;
+			playerOne.setSquare(grid, 1);
+			playerOne.setSquare(grid, 4);
+			playerOne.setSquare(grid, 7);
+
+			let player = playerOne.isWinner(grid);
+			assert.deepEqual(player.marker, playerOne.marker);
+			assert.deepEqual(player.index, [1,4,7]);
+		});
+
+		it("should have a win in Horizontal 3", function() {
+			testBoard = new Tictactoe();
+			let grid = testBoard.getBoard();;
+			playerOne.setSquare(grid, 2);
+			playerOne.setSquare(grid, 5);
+			playerOne.setSquare(grid, 8);
+
+			let player = playerOne.isWinner(grid);
+			assert.deepEqual(player.marker, playerOne.marker);
+			assert.deepEqual(player.index, [2,5,8]);
+		});
+	});
+
+
 });
-	//
-  //     testBoard.markSquare(3, playerOne);
-  //     testBoard.markSquare(4, playerOne);
-  //     testBoard.markSquare(5, playerOne);
-  //     player =testBoard.isWinner(playerOne);
-  //     assert.deepEqual(player.marker, playerOne.marker);
-  //     result =testBoard.isGameOver(player);
-  //     assert.deepEqual(result, [3,4,5]);
-	//
-  //     testBoard.resetGame();
-  //     testBoard.markSquare(6, playerOne);
-  //     testBoard.markSquare(7, playerOne);
-  //     testBoard.markSquare(8, playerOne);
-  //     player =testBoard.isWinner(playerOne);
-  //     assert.deepEqual(player.marker, playerOne.marker);
-  //     result =testBoard.isGameOver(player);
-  //     assert.deepEqual(result, [6,7,8]);
-  //   });
-  //   it("should have a vertical win", function() {
-  //     testBoard.resetGame();
-  //     testBoard.markSquare(0, playerOne);
-  //     testBoard.markSquare(3, playerOne);
-  //     testBoard.markSquare(6, playerOne);
-  //     let player =testBoard.isWinner(playerOne);
-  //     assert.deepEqual(player.marker, playerOne.marker);
-  //     let result =testBoard.isGameOver(player);
-  //     assert.deepEqual(result, [0,3,6]);
-	//
-  //     testBoard.resetGame();
-  //     testBoard.markSquare(1, playerOne);
-  //     testBoard.markSquare(4, playerOne);
-  //     testBoard.markSquare(7, playerOne);
-  //     player =testBoard.isWinner(playerOne);
-  //     assert.deepEqual(player.marker, playerOne.marker);
-  //     result =testBoard.isGameOver(player);
-  //     assert.deepEqual(result, [1,4,7]);
-	//
-  //     testBoard.resetGame();
-  //     testBoard.markSquare(2, playerOne);
-  //     testBoard.markSquare(5, playerOne);
-  //     testBoard.markSquare(8, playerOne);
-  //     player =testBoard.isWinner(playerOne);
-  //     assert.deepEqual(player.marker, playerOne.marker);
-  //     result =testBoard.isGameOver(player);
-  //     assert.deepEqual(result, [2,5,8]);
-  //   });
-  //   it("should have a diagonal win", function() {
-  //     testBoard.resetGame();
-  //     testBoard.markSquare(0, playerOne);
-  //     testBoard.markSquare(4, playerOne);
-  //     testBoard.markSquare(8, playerOne);
-  //     let player =testBoard.isWinner(playerOne);
-  //     assert.deepEqual(player.marker, playerOne.marker);
-  //     let result =testBoard.isGameOver(player);
-  //     assert.deepEqual(result, [0,4,8]);
-	//
-  //     testBoard.resetGame();
-  //     testBoard.markSquare(2, playerOne);
-  //     testBoard.markSquare(4, playerOne);
-  //     testBoard.markSquare(6, playerOne);
-  //     player =testBoard.isWinner(playerOne);
-  //     assert.deepEqual(player.marker, playerOne.marker);
-  //     result =testBoard.isGameOver(player);
-  //     assert.deepEqual(result, [2,4,6]);
-  //   });
-  // });
-	//
