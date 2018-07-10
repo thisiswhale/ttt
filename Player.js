@@ -34,3 +34,5 @@ class Player {
 		return winner;
 	}
 }
+
+module.exports = Player;

@@ -1,3 +1,5 @@
+"use strict";
+
 class Human extends Player {
 	constructor(name, marker){
 		super(name,marker);
@@ -7,3 +9,5 @@ class Human extends Player {
 		gameboard[squareId] = this.marker;
 	}
 }
+
+module.exports = Human;

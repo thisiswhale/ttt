@@ -1,3 +1,5 @@
+"use strict";
+
 class Tictactoe extends Board{
 	constructor(){
 		super();
@@ -17,3 +19,5 @@ class Tictactoe extends Board{
 	}
 
 }
+
+module.exports = Tictactoe;
