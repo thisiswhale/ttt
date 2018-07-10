@@ -1,4 +1,5 @@
 "use strict";
+const Player = require("./Player.js");
 
 class Computer extends Player {
 	constructor(name, marker) {

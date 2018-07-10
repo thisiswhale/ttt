@@ -1,4 +1,5 @@
 "use strict";
+const Board = require("./Board.js");
 
 class Tictactoe extends Board{
 	constructor(){
