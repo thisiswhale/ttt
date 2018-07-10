@@ -198,6 +198,40 @@ describe("Tic Tac Toe App Test", function() {
 			assert.deepEqual(player.marker, playerOne.marker);
 			assert.deepEqual(player.index, [2,4,6]);
 		});
+	});
+
+	describe("Draw indicator",function() {
+		before(function() {
+			testBoard = new Tictactoe();
+			let grid = testBoard.getBoard();
+			playerOne.setSquare(grid, 1);
+			playerTwo.setSquare(grid, 3);
+			playerOne.setSquare(grid, 4);
+			playerTwo.setSquare(grid, 7);
+			playerOne.setSquare(grid, 6);
+			playerTwo.setSquare(grid, 2);
+			playerOne.setSquare(grid, 0);
+			playerTwo.setSquare(grid, 8);
+			playerOne.setSquare(grid, 5);
+		});
+
+		it("should have no empty cells", function(){
+			assert.deepEqual(testBoard.hasTie(), true);
+		});
+
+		it("should not have player 1 win", function() {
+			let playerI = playerOne.isWinner(testBoard.getBoard());
+			assert.deepEqual(playerI, null);
+			let resultI = testBoard.isGameOver(playerI);
+			assert.deepEqual(resultI, true);
+		});
+
+		it("should not have player 2 win", function() {
+			let playerII = playerTwo.isWinner(testBoard.getBoard());
+			assert.deepEqual(playerII, null);
+			let resultII = testBoard.isGameOver(playerII);
+			assert.deepEqual(resultII, true);
+		});
 
 	});
 });
