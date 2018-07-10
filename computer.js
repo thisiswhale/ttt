@@ -1,3 +1,5 @@
+"use strict";
+
 class Computer extends Player {
 	constructor(name, marker) {
 		super(name, marker);
