@@ -3,6 +3,7 @@ Created by William Leung
 
 Original submission to 8th Light.
 
+[demo](https://thisiswhale.github.io/ttt/))
 #### Specifications
 
 - Allow for a human player
