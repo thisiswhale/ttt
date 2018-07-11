@@ -221,14 +221,14 @@ describe("Tic Tac Toe App Test", function() {
 
 		it("should not have player 1 win", function() {
 			let playerI = playerOne.isWinner(testBoard.getBoard());
-			assert.deepEqual(playerI, null);
+			assert.deepEqual(playerI, false);
 			let resultI = testBoard.isGameOver(playerI);
 			assert.deepEqual(resultI, true);
 		});
 
 		it("should not have player 2 win", function() {
 			let playerII = playerTwo.isWinner(testBoard.getBoard());
-			assert.deepEqual(playerII, null);
+			assert.deepEqual(playerII, false);
 			let resultII = testBoard.isGameOver(playerII);
 			assert.deepEqual(resultII, true);
 		});
