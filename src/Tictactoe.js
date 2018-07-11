@@ -11,7 +11,7 @@ class Tictactoe extends Board{
 		return this.playerOneTurn;
 	}
 
-	setPlayerTurn(){
+	nextPlayerTurn(){
 		this.playerOneTurn = !this.playerOneTurn;
 	}
 

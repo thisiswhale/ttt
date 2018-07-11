@@ -4,6 +4,7 @@ const Player = require("./Player.js");
 class Computer extends Player {
 	constructor(name, marker) {
 		super(name, marker);
+		this.bestMoveId = '';
 	}
 
 	emptySquares(arr) {
@@ -86,8 +87,12 @@ class Computer extends Player {
 	}
 
 	setSquare(gameboard) {
-		let getBestMoveId = this.minimax(gameboard, this.marker).index;
-		gameboard[getBestMoveId] = this.marker;
+		this.bestMoveId = this.minimax(gameboard, this.marker).index;
+		gameboard[this.bestMoveId ] = this.marker;
+	}
+
+	getMove(){
+		return this.bestMoveId;
 	}
 }
 
