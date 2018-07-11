@@ -23,12 +23,11 @@ const Tictactoe = require('./Tictactoe.js');
 
 document.addEventListener("DOMContentLoaded", function(event) {
 
+	const tableUI = document.querySelector('table');
 	const squares = document.querySelectorAll('.cell');
 
 	const controlSettings = document.querySelector('#control');
 	controlSettings.onclick = newGame;
-
-	const tableUI = document.querySelector('table');
 
 	let game = new Tictactoe();
 	let grid = game.getBoard();
@@ -37,6 +36,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	let player2;
 	let currPlayer;
 	let currMode;
+
 	newGame();
 
 	function setMode(selection) {
@@ -83,7 +83,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 	function againstComputer(square) {
 		let selectCell = square.target;
-		console.log('just computer');
 		if (selectCell.className.includes('cell') && typeof grid[selectCell.id] == 'number') {
 
 			currPlayer = getPlayerTurn();
@@ -92,16 +91,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 			if (!isGameFinished(currPlayer)) {
 				game.nextPlayerTurn();
+				currPlayer = getPlayerTurn();
+				AiMove(currPlayer);
 			}
-			//Player 2 Computer turn
-			// if (currPlayer.name === 'Computer') {
-			// 	currPlayer.setSquare(grid);
-			// 	displaySquare(currPlayer, currPlayer.getMove());
-			//
-			// 	if (!isGameFinished(currPlayer)) {
-			// 		game.nextPlayerTurn();
-			// 	}
-			// }
+		}
+	}
+
+	function AiMove(computer){
+		computer.setSquare(grid);
+		displaySquare(computer, computer.getMove());
+
+		if (!isGameFinished(computer)) {
+			game.nextPlayerTurn();
 		}
 	}
 
