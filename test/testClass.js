@@ -22,7 +22,6 @@ describe("Tic Tac Toe App Test", function() {
 		});
 
 		it("should contain array with integers 0-8", function() {
-			let grid = testBoard.getBoard();
 			assert.deepEqual(grid, [0, 1, 2, 3, 4, 5, 6, 7, 8]);
 		});
 
@@ -33,20 +32,17 @@ describe("Tic Tac Toe App Test", function() {
 
 	describe("Player1's first move",function() {
 		it("should have a cell fill by Player1's move", function() {
-			let grid = testBoard.getBoard();
 			playerOne.setSquare(grid, 2);
 			assert.deepEqual(grid[2],playerOne.marker);
 		});
 
 		it("should be a data type string by Player1's move", function() {
-			let grid = testBoard.getBoard();
 			assert.deepEqual(typeof grid[0],'number');
 			assert.deepEqual(typeof grid[1],'number');
 			assert.deepEqual(typeof grid[2],'string');
 		});
 
 		it("should not end the game", function() {
-			let grid = testBoard.getBoard();
 			assert.deepEqual(testBoard.isGameOver(playerOne.isWinner(grid)), false);
 		});
 
@@ -58,25 +54,21 @@ describe("Tic Tac Toe App Test", function() {
 
 	describe("Player2's move",function() {
     it("should have a cell fill by Player2's move", function() {
-			let grid = testBoard.getBoard();
 			playerTwo.setSquare(grid, 4);
       assert.deepEqual(grid[4],playerTwo.marker);
     });
 
     it("should be a data type string by Player2's move", function() {
-			let grid = testBoard.getBoard();
       assert.deepEqual(typeof grid[0],'number');
       assert.deepEqual(typeof grid[1],'number');
       assert.deepEqual(typeof grid[4],'string');
     });
 
     it("should not end the game", function() {
-			let grid = testBoard.getBoard();
 			assert.deepEqual(testBoard.isGameOver(playerTwo.isWinner(grid)), false);
     });
 
     it("should switch player move", function() {
-			let grid = testBoard.getBoard();
       testBoard.nextPlayerTurn();
       assert.deepEqual(testBoard.isPlayerOneTurn(), true);
     });
@@ -85,12 +77,11 @@ describe("Tic Tac Toe App Test", function() {
 	describe("Reset the game",function() {
     it("should have total moves of 9", function() {
       testBoard = new Tictactoe();
-			let grid = testBoard.getBoard();
+			grid = testBoard.getBoard();
       let len =grid.length
       assert.deepEqual(len, 9);
     });
     it("should contain array with integers 0-8", function() {
-		let grid = testBoard.getBoard();
     assert.deepEqual(grid, [0,1,2,3,4,5,6,7,8]);
     });
     it("should have first move by Player 1", function() {
@@ -101,7 +92,7 @@ describe("Tic Tac Toe App Test", function() {
 	describe("Winning row indicator",function() {
     it("should have a win in Row 1", function() {
 			testBoard = new Tictactoe();
-			let grid = testBoard.getBoard();
+			grid = testBoard.getBoard();
 			playerOne.setSquare(grid, 0);
 			playerOne.setSquare(grid, 1);
 			playerOne.setSquare(grid, 2);
@@ -113,7 +104,7 @@ describe("Tic Tac Toe App Test", function() {
 
 		it("should have a win in Row 2", function() {
 			testBoard = new Tictactoe();
-			let grid = testBoard.getBoard();
+			grid = testBoard.getBoard();
 			playerOne.setSquare(grid, 3);
 			playerOne.setSquare(grid, 4);
 			playerOne.setSquare(grid, 5);
@@ -125,7 +116,7 @@ describe("Tic Tac Toe App Test", function() {
 
 		it("should have a win in Row 3", function() {
 			testBoard = new Tictactoe();
-			let grid = testBoard.getBoard();
+			grid = testBoard.getBoard();
 			playerOne.setSquare(grid, 6);
 			playerOne.setSquare(grid, 7);
 			playerOne.setSquare(grid, 8);
@@ -139,7 +130,7 @@ describe("Tic Tac Toe App Test", function() {
 	describe("Winning horizontal indicator",function() {
     it("should have a win in Horizontal 1", function() {
 			testBoard = new Tictactoe();
-			let grid = testBoard.getBoard();
+			grid = testBoard.getBoard();
 			playerOne.setSquare(grid, 0);
 			playerOne.setSquare(grid, 3);
 			playerOne.setSquare(grid, 6);
@@ -151,7 +142,7 @@ describe("Tic Tac Toe App Test", function() {
 
 		it("should have a win in Horizontal 2", function() {
 			testBoard = new Tictactoe();
-			let grid = testBoard.getBoard();
+			grid = testBoard.getBoard();
 			playerOne.setSquare(grid, 1);
 			playerOne.setSquare(grid, 4);
 			playerOne.setSquare(grid, 7);
@@ -163,7 +154,7 @@ describe("Tic Tac Toe App Test", function() {
 
 		it("should have a win in Horizontal 3", function() {
 			testBoard = new Tictactoe();
-			let grid = testBoard.getBoard();
+			grid = testBoard.getBoard();
 			playerOne.setSquare(grid, 2);
 			playerOne.setSquare(grid, 5);
 			playerOne.setSquare(grid, 8);
@@ -177,7 +168,7 @@ describe("Tic Tac Toe App Test", function() {
 	describe("Winning diagonal indicator",function() {
 		it("should have a win in Diagonal 1", function() {
 			testBoard = new Tictactoe();
-			let grid = testBoard.getBoard();
+			grid = testBoard.getBoard();
 			playerOne.setSquare(grid, 0);
 			playerOne.setSquare(grid, 4);
 			playerOne.setSquare(grid, 8);
@@ -189,7 +180,7 @@ describe("Tic Tac Toe App Test", function() {
 
 		it("should have a win in Diagonal 2", function() {
 			testBoard = new Tictactoe();
-			let grid = testBoard.getBoard();
+			grid = testBoard.getBoard();
 			playerOne.setSquare(grid, 2);
 			playerOne.setSquare(grid, 4);
 			playerOne.setSquare(grid, 6);
@@ -203,7 +194,7 @@ describe("Tic Tac Toe App Test", function() {
 	describe("Draw indicator",function() {
 		before(function() {
 			testBoard = new Tictactoe();
-			let grid = testBoard.getBoard();
+			grid = testBoard.getBoard();
 			playerOne.setSquare(grid, 1);
 			playerTwo.setSquare(grid, 3);
 			playerOne.setSquare(grid, 4);
@@ -238,7 +229,7 @@ describe("Tic Tac Toe App Test", function() {
 
     it("should have Player 1 move first", function() {
 			testBoard = new Tictactoe();
-			let grid = testBoard.getBoard();
+			grid = testBoard.getBoard();
     	assert.deepEqual(testBoard.isPlayerOneTurn(), true);
     });
 
@@ -250,7 +241,7 @@ describe("Tic Tac Toe App Test", function() {
 
 		it("should find a possible AI win", function() {
 			testBoard = new Tictactoe();
-			let grid = testBoard.getBoard();
+			grid = testBoard.getBoard();
 
 				playerOne.setSquare(grid, 1);
 				computer.setSquare(grid);
@@ -266,7 +257,7 @@ describe("Tic Tac Toe App Test", function() {
 
 		it("should not allow a Human to win, Human Lose", function() {
 			testBoard = new Tictactoe();
-			let grid = testBoard.getBoard();
+			grid = testBoard.getBoard();
 
 			playerOne.setSquare(grid, 3);
 			computer.setSquare(grid);
@@ -283,7 +274,7 @@ describe("Tic Tac Toe App Test", function() {
 
 		it("should not allow a Human to win, Draw", function() {
 			testBoard = new Tictactoe();
-			let grid = testBoard.getBoard();
+			grid = testBoard.getBoard();
 
 			playerOne.setSquare(grid, 3);
 			computer.setSquare(grid);
