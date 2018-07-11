@@ -54,14 +54,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 			if(selectCell.className.includes('cell') &&
 					typeof grid[selectCell.id] == 'number'){
-				//Player 1 Human turn
-				if(game.isPlayerOneTurn()){
-					currPlayer = player1;
-				}
-				//Player 2 Human turn
-				else if(!game.isPlayerOneTurn() && player2.name === 'Human'){
-					currPlayer = player2;
-				}
+
+						currPlayer = getPlayerTurn();
+
 				viewSquare(selectCell.id, currPlayer);
 
 				if(!isGameFinished(currPlayer)){
@@ -76,6 +71,15 @@ document.addEventListener("DOMContentLoaded", function(event) {
 				// }
     }
   }
+
+	function getPlayerTurn(){
+		if(game.isPlayerOneTurn()){
+			return player1;
+		}
+		else if(!game.isPlayerOneTurn() && player2.name === 'Human'){
+			return player2;
+		}
+	}
 
 	function viewSquare(squareId, player){
 		player.setSquare(grid, squareId);
@@ -105,8 +109,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	}
 
 	function newGame(event){
+
 		game = new Tictactoe();
 		grid = game.getBoard();
+
 		const node = event.target.className;
 		if(node.includes('mode'))	{
 			//Removes grid classNames with full, win and tie.
