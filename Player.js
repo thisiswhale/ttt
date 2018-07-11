@@ -24,7 +24,7 @@ class Player {
 		//finds the index of the player's marker
 		let markersPlay = grid.reduce((arr, gridIndexMarker, index) =>
 				(gridIndexMarker === playerMarker) ? arr.concat(index) : arr, []);
-		let winner = null;
+		let winner = false;
 		//use winSets to compare markersPlay to find the winning combination
 			for (let [index, thisSet] of winSets.entries()) {
 				if (thisSet.every(el => markersPlay.indexOf(el) > -1)) {
