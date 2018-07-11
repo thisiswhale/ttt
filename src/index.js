@@ -111,6 +111,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 		if (typeof result === 'object') {
 			displayWin(result);
+			tableUI.onclick = "";
 			return;
 
 		} else if (typeof result === 'boolean' && result === true) {
