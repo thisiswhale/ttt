@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	const controlSettings = document.querySelector('#control');
 	const tableUI = document.querySelector('table');
 
-	// controlSettings.addEventListener('click', newGame);
+	controlSettings.addEventListener('click', newGame);
 	tableUI.addEventListener('click', humanTurn)
 
 	function humanTurn(square){
@@ -66,7 +66,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 				if(!isGameFinished(currPlayer)){
 					game.setPlayerTurn();
-				};
+				}
+
 
 				// //Player 2 Computer turn
 				// if (!game.isPlayerOneTurn() && player2.name === 'Computer'){
@@ -103,20 +104,20 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		return false;
 	}
 
-	// function newGame(event){
-	// 	game = new Tictactoe();
-	//
-	// 	const node = event.target.className;
-	// 	if(node.includes('mode'))	{
-	// 		//Removes grid classNames with full, win and tie.
-	// 		squares.forEach( cell => {
-	// 			cell.innerHTML ="";
-	// 			cell.className = cell.className.split(" ").filter(className =>
-	// 				className != 'full' && className !='win' && className != 'tie'
-	// 				).join(" ");
-	// 	 });
-	// 	}
-	// }
+	function newGame(event){
+		game = new Tictactoe();
+		grid = game.getBoard();
+		const node = event.target.className;
+		if(node.includes('mode'))	{
+			//Removes grid classNames with full, win and tie.
+			squares.forEach( cell => {
+				cell.innerHTML ="";
+				cell.className = cell.className.split(" ").filter(className =>
+					className != 'full' && className !='win' && className != 'tie'
+					).join(" ");
+		 });
+		}
+	}
 
 
 
