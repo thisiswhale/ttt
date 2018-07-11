@@ -11,28 +11,18 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	const controlSettings = document.querySelector('#control');
 	controlSettings.onclick = newGame;
 
-	let game = new Tictactoe();
-	let grid = game.getBoard();
-
 	let player1 = new Human('Human', 'x');
 	let player2;
 	let currPlayer;
+
+	let game;
+	let grid;
 	let currMode;
 
 	newGame();
 
-	function setMode(selection) {
-		if (selection === 'computer') {
-			player2 = new Computer('Computer', 'o')
-			currMode = againstComputer;
-		} else {
-			player2 = new Human('Human', 'o');
-			currMode = againstHuman;
-		}
-		tableUI.onclick = currMode;
-	}
-
 	function newGame(event) {
+
 		game = new Tictactoe();
 		grid = game.getBoard();
 
@@ -46,7 +36,23 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		}
 	}
 
+	function setMode(selection) {
+		if (selection === 'computer') {
+
+			player2 = new Computer('Computer', 'o')
+			currMode = againstComputer;
+
+		} else {
+
+			player2 = new Human('Human', 'o');
+			currMode = againstHuman;
+
+		}
+		tableUI.onclick = currMode;
+	}
+
 	function againstHuman(square) {
+
 		let selectCell = square.target;
 		if (selectCell.className.includes('cell') && typeof grid[selectCell.id] == 'number') {
 
@@ -61,6 +67,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	}
 
 	function againstComputer(square) {
+
 		let selectCell = square.target;
 		if (selectCell.className.includes('cell') && typeof grid[selectCell.id] == 'number') {
 
@@ -77,6 +84,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	}
 
 	function AiMove(computer) {
+
 		computer.setSquare(grid);
 		displaySquare(computer, computer.getMove());
 
@@ -90,7 +98,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	}
 
 	function displaySquare(player, squareId) {
+
 		let square = document.getElementById(squareId);
+
 		square.innerText = player.marker;
 		square.className += ' full';
 	}
@@ -102,9 +112,11 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		if (typeof result === 'object') {
 			displayWin(result);
 			return;
+
 		} else if (typeof result === 'boolean' && result === true) {
 			displayTie();
 			return;
+
 		}
 		return false;
 	}
