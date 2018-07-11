@@ -1,0 +1,27 @@
+{
+  "name": "ttt",
+  "version": "1.0.0",
+  "description": "Created by William Leung",
+  "main": "SOLID.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thisiswhale/ttt.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thisiswhale/ttt/issues"
+  },
+  "homepage": "https://github.com/thisiswhale/ttt#readme",
+  "devDependencies": {
+    "webpack": "^4.15.1",
+    "webpack-cli": "^3.0.8"
+  }
+}
