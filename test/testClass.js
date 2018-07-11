@@ -1,8 +1,10 @@
 const assert = require('assert');
 
-const Human = require('../Human.js');
-const Computer = require('../Computer.js');
-const Tictactoe = require('../Tictactoe.js');
+const Player = require('../src/Player.js');
+const Human = require('../src/Human.js');
+const Computer = require('../src/Computer.js');
+const Board = require('../src/Board.js');
+const Tictactoe = require('../src/Tictactoe.js');
 
 describe("Tic Tac Toe App Test", function() {
 	let testBoard;
