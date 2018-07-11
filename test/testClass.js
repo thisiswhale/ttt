@@ -5,18 +5,18 @@ const Computer = require('../src/Computer.js');
 const Tictactoe = require('../src/Tictactoe.js');
 
 describe("Tic Tac Toe App Test", function() {
-	let testBoard;
+	let testBoard, grid;
 	let playerOne = new Human('Player1', 'x');
 	let playerTwo = new Human('Player2', 'o');
 	let computer = new Computer('Computer', 'o');
 
 	before(function() {
 		testBoard = new Tictactoe();
+		grid = testBoard.getBoard();
 	});
 
 	describe("Starting a game", function() {
 		it("should have total moves of 9", function() {
-			let grid = testBoard.getBoard();
 			let len = grid.length
 			assert.deepEqual(len, 9);
 		});
@@ -51,7 +51,7 @@ describe("Tic Tac Toe App Test", function() {
 		});
 
 		it("should switch player move", function() {
-			testBoard.setPlayerTurn();
+			testBoard.nextPlayerTurn();
 			assert.deepEqual(testBoard.isPlayerOneTurn(), false);
 		});
 	});
@@ -77,7 +77,7 @@ describe("Tic Tac Toe App Test", function() {
 
     it("should switch player move", function() {
 			let grid = testBoard.getBoard();
-      testBoard.setPlayerTurn();
+      testBoard.nextPlayerTurn();
       assert.deepEqual(testBoard.isPlayerOneTurn(), true);
     });
   });
@@ -101,7 +101,7 @@ describe("Tic Tac Toe App Test", function() {
 	describe("Winning row indicator",function() {
     it("should have a win in Row 1", function() {
 			testBoard = new Tictactoe();
-			let grid = testBoard.getBoard();;
+			let grid = testBoard.getBoard();
 			playerOne.setSquare(grid, 0);
 			playerOne.setSquare(grid, 1);
 			playerOne.setSquare(grid, 2);
@@ -113,7 +113,7 @@ describe("Tic Tac Toe App Test", function() {
 
 		it("should have a win in Row 2", function() {
 			testBoard = new Tictactoe();
-			let grid = testBoard.getBoard();;
+			let grid = testBoard.getBoard();
 			playerOne.setSquare(grid, 3);
 			playerOne.setSquare(grid, 4);
 			playerOne.setSquare(grid, 5);
@@ -125,7 +125,7 @@ describe("Tic Tac Toe App Test", function() {
 
 		it("should have a win in Row 3", function() {
 			testBoard = new Tictactoe();
-			let grid = testBoard.getBoard();;
+			let grid = testBoard.getBoard();
 			playerOne.setSquare(grid, 6);
 			playerOne.setSquare(grid, 7);
 			playerOne.setSquare(grid, 8);
@@ -139,7 +139,7 @@ describe("Tic Tac Toe App Test", function() {
 	describe("Winning horizontal indicator",function() {
     it("should have a win in Horizontal 1", function() {
 			testBoard = new Tictactoe();
-			let grid = testBoard.getBoard();;
+			let grid = testBoard.getBoard();
 			playerOne.setSquare(grid, 0);
 			playerOne.setSquare(grid, 3);
 			playerOne.setSquare(grid, 6);
@@ -151,7 +151,7 @@ describe("Tic Tac Toe App Test", function() {
 
 		it("should have a win in Horizontal 2", function() {
 			testBoard = new Tictactoe();
-			let grid = testBoard.getBoard();;
+			let grid = testBoard.getBoard();
 			playerOne.setSquare(grid, 1);
 			playerOne.setSquare(grid, 4);
 			playerOne.setSquare(grid, 7);
@@ -163,7 +163,7 @@ describe("Tic Tac Toe App Test", function() {
 
 		it("should have a win in Horizontal 3", function() {
 			testBoard = new Tictactoe();
-			let grid = testBoard.getBoard();;
+			let grid = testBoard.getBoard();
 			playerOne.setSquare(grid, 2);
 			playerOne.setSquare(grid, 5);
 			playerOne.setSquare(grid, 8);
@@ -177,7 +177,7 @@ describe("Tic Tac Toe App Test", function() {
 	describe("Winning diagonal indicator",function() {
 		it("should have a win in Diagonal 1", function() {
 			testBoard = new Tictactoe();
-			let grid = testBoard.getBoard();;
+			let grid = testBoard.getBoard();
 			playerOne.setSquare(grid, 0);
 			playerOne.setSquare(grid, 4);
 			playerOne.setSquare(grid, 8);
@@ -189,7 +189,7 @@ describe("Tic Tac Toe App Test", function() {
 
 		it("should have a win in Diagonal 2", function() {
 			testBoard = new Tictactoe();
-			let grid = testBoard.getBoard();;
+			let grid = testBoard.getBoard();
 			playerOne.setSquare(grid, 2);
 			playerOne.setSquare(grid, 4);
 			playerOne.setSquare(grid, 6);
@@ -232,6 +232,80 @@ describe("Tic Tac Toe App Test", function() {
 			let resultII = testBoard.isGameOver(playerII);
 			assert.deepEqual(resultII, true);
 		});
-
 	});
+
+	describe("Playing against a Computer",function() {
+
+    it("should have Player 1 move first", function() {
+			testBoard = new Tictactoe();
+			let grid = testBoard.getBoard();
+    	assert.deepEqual(testBoard.isPlayerOneTurn(), true);
+    });
+
+		it("should get computer's move to be a number", function() {
+				playerOne.setSquare(testBoard.getBoard(), 1);
+				computer.setSquare(testBoard.getBoard());
+				assert.deepEqual(typeof computer.getMove(), 'number');
+		});
+
+		it("should find a possible AI win", function() {
+			testBoard = new Tictactoe();
+			let grid = testBoard.getBoard();
+
+				playerOne.setSquare(grid, 1);
+				computer.setSquare(grid);
+				playerOne.setSquare(grid, 2);
+				computer.setSquare(grid);
+				playerOne.setSquare(grid, 5);
+				computer.setSquare(grid);
+
+				assert.deepEqual(playerOne.isWinner(grid), false);
+				assert.deepEqual(typeof computer.isWinner(grid), 'object');
+
+		});
+
+		it("should not allow a Human to win, Human Lose", function() {
+			testBoard = new Tictactoe();
+			let grid = testBoard.getBoard();
+
+			playerOne.setSquare(grid, 3);
+			computer.setSquare(grid);
+			playerOne.setSquare(grid, 5);
+			computer.setSquare(grid);
+			playerOne.setSquare(grid, 8);
+			computer.setSquare(grid);
+			playerOne.setSquare(grid, 1);
+			computer.setSquare(grid);
+
+			assert.deepEqual(playerOne.isWinner(grid), false);
+			assert.deepEqual(typeof computer.isWinner(grid), 'object');
+		});
+
+		it("should not allow a Human to win, Draw", function() {
+			testBoard = new Tictactoe();
+			let grid = testBoard.getBoard();
+
+			playerOne.setSquare(grid, 3);
+			computer.setSquare(grid);
+			playerOne.setSquare(grid, 4);
+			computer.setSquare(grid);
+			playerOne.setSquare(grid, 2);
+			computer.setSquare(grid);
+			playerOne.setSquare(grid, 7);
+			computer.setSquare(grid);
+			playerOne.setSquare(grid, 8);
+
+			let human = playerOne.isWinner(grid);
+			assert.deepEqual(human, false);
+			let result = testBoard.isGameOver(human);
+			assert.deepEqual(result, true);
+
+			let Ai = computer.isWinner(grid);
+			assert.deepEqual(Ai, false);
+			let resultAi = testBoard.isGameOver(Ai);
+			assert.deepEqual(resultAi, true);
+
+    });
+	});
+
 });
