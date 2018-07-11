@@ -66,10 +66,10 @@ class Computer extends Player {
 		// recursive base cases
 		if (this.isWinner(board, 'x')) {
 			//humans win game
-			return {score: -10};
+			return {score: -100};
 		} else if (this.isWinner(board, 'o')) {
 			//computer wins game
-			return {score: 10};
+			return {score: 100};
 		} else if (availSquares.length === 0) {
 			//human and computer tie
 			return {score: 0};
@@ -79,7 +79,8 @@ class Computer extends Player {
 		// index and a score
 		const moves = this.createMovesArr(board, availSquares, playerMarker);
 
-		// select the index of the best move (from the moves array) by score based on the current player
+		// select the index of the best move (from the moves array)
+		//by score based on the current player
 		const bestIdSquare = this.bestIdFromMoves(moves, playerMarker);
 
 		// return the chosen move(object)from the array to the higher depth

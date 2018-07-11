@@ -2,24 +2,6 @@
 const Human = require('./Human.js');
 const Computer = require('./Computer.js');
 const Tictactoe = require('./Tictactoe.js');
-//
-// let test = new Tictactoe();
-// let p = new Human('human', 'x');
-// let ai = new Computer('name', 'o')
-//
-// p.setSquare(test.getBoard(), 0);
-//
-// p.setSquare(test.getBoard(), 1);
-//
-// p.setSquare(test.getBoard(), 2);
-
-// console.log(test.hasTie())
-// console.log(test.isGameOver(p.isWinner(test.getBoard())))
-// console.log(test.getBoard())
-// console.log(p.isWinner(test.getBoard(), p.getData().marker))
-// console.log(test.hasTie())
-
-// test.isWinner() || test.hasTie
 
 document.addEventListener("DOMContentLoaded", function(event) {
 
@@ -56,8 +38,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 		if (event === undefined) {
 			setMode();
-		}
-		else{
+		} else {
 			const node = event.target;
 			//set game to play against human or computer
 			setMode(node.id);
@@ -66,9 +47,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	}
 
 	function againstHuman(square) {
-
 		let selectCell = square.target;
-
 		if (selectCell.className.includes('cell') && typeof grid[selectCell.id] == 'number') {
 
 			currPlayer = getPlayerTurn();
@@ -97,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		}
 	}
 
-	function AiMove(computer){
+	function AiMove(computer) {
 		computer.setSquare(grid);
 		displaySquare(computer, computer.getMove());
 
@@ -107,9 +86,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	}
 
 	function getPlayerTurn() {
-		return game.isPlayerOneTurn()
-			? player1
-			: player2;
+		return game.isPlayerOneTurn() ? player1 : player2;
 	}
 
 	function displaySquare(player, squareId) {
@@ -145,7 +122,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	}
 
 	function displayReset(node) {
-		//Removes full, win and tie class in the grid
+		//Removes full, win, and tie class in the grid
 		if (node.includes('mode')) {
 			squares.forEach(cell => {
 				cell.innerHTML = "";
