@@ -1,4 +1,7 @@
 "use strict";
+const Human = require('./Human.js');
+const Computer = require('./Computer.js');
+const Tictactoe = require('./Tictactoe.js');
 
 let test = new Tictactoe();
 let p = new Human('human', 'x');
