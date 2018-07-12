@@ -1,27 +1,27 @@
 "use strict";
 const Board = require("./Board.js");
 
-class Tictactoe extends Board{
-	constructor(){
-		super();
-		this.playerOneTurn = true;
-	}
+class Tictactoe extends Board {
+  constructor() {
+    super();
+    this.playerOneTurn = true;
+  }
 
-	isPlayerOneTurn(){
-		return this.playerOneTurn;
-	}
+  isPlayerOneTurn() {
+    return this.playerOneTurn;
+  }
 
-	nextPlayerTurn(){
-		this.playerOneTurn = !this.playerOneTurn;
-	}
+  nextPlayerTurn() {
+    this.playerOneTurn = !this.playerOneTurn;
+  }
 
-	hasTie(){
-		return this.grid.filter( square => typeof square === 'number').length === 0;
-	}
+  hasTie() {
+    return this.grid.filter(square => typeof square === "number").length === 0;
+  }
 
-	isGameOver(hasWon){
-		return hasWon || this.hasTie();
-	}
+  isGameOver(hasWon) {
+    return hasWon || this.hasTie();
+  }
 }
 
 module.exports = Tictactoe;
